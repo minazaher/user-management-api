@@ -14,7 +14,7 @@ import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('users') // ✅ Group routes under "users"
+@ApiTags('users') // 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
