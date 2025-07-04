@@ -15,4 +15,20 @@ export class UsersService {
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
+
+  async findUserById(id: string): Promise<User | null> {
+    return this.userModel.findById(id).exec();
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
+    return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
+  }
+  
+  async remove(id: string): Promise<void> {
+    await this.userModel.findByIdAndDelete(id).exec();
+  }
 }
