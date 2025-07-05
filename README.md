@@ -5,7 +5,7 @@ NestJS REST API for user management with MongoDB
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js v18+
+- Node.js v20+
 - MongoDB (local or Atlas)
 - npm
 
@@ -35,37 +35,49 @@ npm run start:dev
 
 **1. Create User**
 ```bash
-curl -X POST http://localhost:3000/users \
-  -H "Content-Type: application/json" \
+curl -X 'POST' \
+  'http://localhost:3000/users' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "age": 30
-  }'
+  "name": "John Doe",
+  "email": "user122@example.com",
+  "age": 25
+}'
 ```
 
 **2. Get All Users**
 ```bash
-curl http://localhost:3000/users
+curl -X 'GET' \
+  'http://localhost:3000/users' \
+  -H 'accept
 ```
 
 **3. Get Single User**
 ```bash
-curl http://localhost:3000/users/<USER_ID>
+curl -X 'GET' \
+  'http://localhost:3000/users/<USER_ID>' \
+  -H 'accept: */*'
 ```
 
 **4. Update User**
 ```bash
-curl -X PUT http://localhost:3000/users/<USER_ID> \
-  -H "Content-Type: application/json" \
+curl -X 'PUT' \
+  'http://localhost:3000/users/<USER_ID>' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
   -d '{
-    "age": 31
-  }'
+  "name": "John Doe",
+  "email": "user143@example.com",
+  "age": 25
+}'
 ```
 
 **5. Delete User**
 ```bash
-curl -X DELETE http://localhost:3000/users/<USER_ID>
+curl -X 'DELETE' \
+  'http://localhost:3000/users/<USER_ID' \
+  -H 'accept: */*'
 ```
 
 ## Environment Configuration
