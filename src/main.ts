@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { NotFoundMiddleware } from './common/middleware/not-found.middleware';
 
 
 async function bootstrap() {
@@ -14,7 +15,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
+  app.use(new NotFoundMiddleware().use);
   await app.listen(3000);
 }
 bootstrap();
