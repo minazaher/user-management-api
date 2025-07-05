@@ -77,5 +77,3 @@ MONGO_URI=mongodb://localhost:27017/user-management
 
 ## Documentation
 Access Swagger UI at: `http://localhost:3000/api` when running locally
-
-```
