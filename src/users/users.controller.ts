@@ -6,7 +6,6 @@ import {
   Param,
   Delete,
   Put,
-  ParseIntPipe,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
@@ -21,12 +20,14 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // route POST /users
   @Post()
   @HttpCode(HttpStatus.CREATED) 
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
+  // route GET /users
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get all users' })
@@ -34,12 +35,14 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  // route GET /users/id 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: string) {
     return this.usersService.findUserById(id);
   }
 
+  // route PUT /users/id
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   update(
@@ -49,6 +52,7 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  // route DELETE /users/:id
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT) // Proper No Content status
   remove(@Param('id') id: string) {
