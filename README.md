@@ -1,4 +1,3 @@
-```markdown
 # User Management API
 
 NestJS REST API for user management with MongoDB
