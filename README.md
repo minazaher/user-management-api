@@ -76,7 +76,7 @@ curl -X 'PUT' \
 **5. Delete User**
 ```bash
 curl -X 'DELETE' \
-  'http://localhost:3000/users/<USER_ID'> \
+  'http://localhost:3000/users/<USER_ID>' \
   -H 'accept: */*'
 ```
 
