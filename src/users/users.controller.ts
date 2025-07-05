@@ -7,6 +7,8 @@ import {
   Delete,
   Put,
   ParseIntPipe,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
@@ -20,22 +22,26 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED) 
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get all users' })
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+  @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: string) {
     return this.usersService.findUserById(id);
   }
 
   @Put(':id')
+  @HttpCode(HttpStatus.OK)
   update(
     @Param('id')  id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -44,6 +50,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT) // Proper No Content status
   remove(@Param('id') id: string) {
     this.usersService.remove(id);
     return { message: 'User removed' };
