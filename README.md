@@ -12,7 +12,7 @@ NestJS REST API for user management with MongoDB
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/your-repo/user-management-api.git
+git clone https://github.com/minazaher/user-management-api
 
 # Install dependencies
 npm install
@@ -76,7 +76,7 @@ curl -X 'PUT' \
 **5. Delete User**
 ```bash
 curl -X 'DELETE' \
-  'http://localhost:3000/users/<USER_ID' \
+  'http://localhost:3000/users/<USER_ID'> \
   -H 'accept: */*'
 ```
 
