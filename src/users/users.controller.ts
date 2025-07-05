@@ -81,9 +81,7 @@ export class UsersController {
     status: 204,
     description: 'User Removed'
   })
-  @HttpCode(HttpStatus.NO_CONTENT) // Proper No Content status
+  @HttpCode(HttpStatus.NO_CONTENT) 
   remove(@Param('id') id: string) {
-    this.usersService.remove(id);
-    return { message: 'User removed' };
-  }
+    this.usersService.remove(id);  }
 }

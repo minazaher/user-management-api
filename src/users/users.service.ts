@@ -56,7 +56,7 @@ export class UsersService {
 
    /**
    * updates a single user by ID
-   * @param updateUserDto - user updated daata
+   * @param updateUserDto - user updated data
    * @returns the user after update
    * @throws NotFoundException if user doesn't exist
    */
@@ -72,7 +72,7 @@ export class UsersService {
     return user;
   }
 
-    /**
+  /**
    * Finds all users
    * @returns User Deleted
    * @throws NotFoundException if user doesn't exist
