@@ -31,20 +31,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: string) {
+  findOne(@Param('id') id: string) {
     return this.usersService.findUserById(id);
   }
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: string,
+    @Param('id')  id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: string) {
+  remove(@Param('id') id: string) {
     this.usersService.remove(id);
     return { message: 'User removed' };
   }
