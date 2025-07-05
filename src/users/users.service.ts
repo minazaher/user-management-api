@@ -1,42 +1,34 @@
-// users.service.ts
 import { Injectable } from '@nestjs/common';
-
-import { UpdateUserDto } from './dto/update-user.dto';
-
-import { User } from './entity/user.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User, UserDocument } from './schema/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  private users: User[] = [];
-  private idCounter = 1;
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+  ) {}
 
-  create(createUserDto: CreateUserDto): User {
-    const user: User = {
-      id: this.idCounter++,
-      ...createUserDto,
-    };
-    this.users.push(user);
-    return user;
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const createdUser = new this.userModel(createUserDto);
+    return createdUser.save();
   }
 
-  findAll(): User[] {
-    return this.users;``
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
   }
 
-  findUserById(id: number): User | undefined {
-    return this.users.find(user => user.id === id);
+  async findUserById(id: string): Promise<User | null> {
+    return this.userModel.findById(id).exec();
   }
 
-  update(id: number, updateUserDto: UpdateUserDto): User | undefined {
-    const user = this.findUserById(id);
-    if (user) {
-        Object.assign(user, updateUserDto);
-    }
-    return user;
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
+    return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
   }
-
-  remove(id: number): void {
-    this.users = this.users.filter(user => user.id !== id);
+  
+  async remove(id: string): Promise<void> {
+    await this.userModel.findByIdAndDelete(id).exec();
   }
 }

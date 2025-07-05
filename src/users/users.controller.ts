@@ -14,7 +14,7 @@ import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('users') // ✅ Group routes under "users"
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -31,20 +31,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.usersService.findUserById(id);
   }
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id')  id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id') id: string) {
     this.usersService.remove(id);
     return { message: 'User removed' };
   }
